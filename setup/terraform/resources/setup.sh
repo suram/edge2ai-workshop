@@ -267,6 +267,8 @@ s#CFM_VERSION#$CFM_VERSION#g;\
 s#CM_VERSION#$CM_VERSION#g;\
 s#SCHEMAREGISTRY_VERSION#$SCHEMAREGISTRY_VERSION#g;\
 s#STREAMS_MESSAGING_MANAGER_VERSION#$STREAMS_MESSAGING_MANAGER_VERSION#g;\
+s#CSA_PARCEL_REPO#$CSA_PARCEL_REPO#g;\
+s#FLINK_VERSION#$FLINK_VERSION#g;\
 " $TEMPLATE
 
 if [ "$ALL_PARCELS" == "OK" ]; then
@@ -283,6 +285,9 @@ fi
 
 CM_REPO_URL=$(grep baseurl /etc/yum.repos.d/cloudera-manager.repo | sed 's/.*=//;s/ //g')
 python $BASE_DIR/create_cluster.py $(hostname -f) $TEMPLATE $KEY_FILE $CM_REPO_URL
+
+# Flink: extra workaround due to https://jira.cloudera.com/browse/CSA-116
+sudo -u hdfs hdfs dfs -chown flink:flink /user/flink
 
 echo "-- Create Kafka topic (iot)"
 kafka-topics --zookeeper edge2ai-1.dim.local:2181 --create --topic iot --partitions 10 --replication-factor 1

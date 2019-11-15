@@ -34,7 +34,9 @@
         ,"yarn-RESOURCEMANAGER-BASE"
         ,"zookeeper-SERVER-BASE"
         ,"nifi-NIFI_NODE-BASE"
-        ,"nifiregistry-NIFI_REGISTRY_SERVER-BASE"
+        ,"nifiregistry-NIFI_REGISTRY_SERVER-BASE",
+        "flink-FLINK_HISTORY_SERVER-BASE",
+        "flink-GATEWAY-BASE"
         ,"nifitoolkitca-NIFI_TOOLKIT_SERVER-BASE"
 OPTIONAL        ,"schemaregistry-SCHEMA_REGISTRY_SERVER-BASE"
 OPTIONAL        ,"streams_messaging_manager-STREAMS_MESSAGING_MANAGER_SERVER-BASE"
@@ -133,6 +135,10 @@ OPTIONAL      }
     {
       "product": "CDH",
       "version": "CDH_PARCEL_VERSION"
+    },
+    {
+      "product": "FLINK",
+      "version": "FLINK_VERSION"
     }
 OPTIONAL   ,{
 OPTIONAL      "product": "SCHEMAREGISTRY",
@@ -147,7 +153,8 @@ OPTIONAL    }
     "CDH_PARCEL_REPO",
     "CFM_PARCEL_REPO",
     "ANACONDA_PARCEL_REPO",
-    "CDSW_PARCEL_REPO"
+    "CDSW_PARCEL_REPO",
+    "CSA_PARCEL_REPO"
     ADDITIONAL_REPOS
   ],
   "services": [
@@ -555,6 +562,36 @@ OPTIONAL    }
         }
       ],
       "serviceType": "CDSW"
+    },
+    {
+      "refName": "flink",
+      "serviceType": "FLINK",
+      "serviceConfigs": [
+        {
+          "name": "yarn_service",
+          "ref": "yarn"
+        },
+        {
+          "name": "zookeeper_service",
+          "ref": "zookeeper"
+        },
+        {
+          "name": "hdfs_service",
+          "ref": "hdfs"
+        }
+      ],
+      "roleConfigGroups": [
+        {
+          "refName": "flink-GATEWAY-BASE",
+          "roleType": "GATEWAY",
+          "base": true
+        },
+        {
+          "refName": "flink-FLINK_HISTORY_SERVER-BASE",
+          "roleType": "FLINK_HISTORY_SERVER",
+          "base": true
+        }
+      ]
     }
 OPTIONAL   ,{
 OPTIONAL      "refName": "schemaregistry",
