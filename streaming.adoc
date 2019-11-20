@@ -1,4 +1,4 @@
-= From Edge to Streams Processing
+= CDF Workshop
 
 In this workshop you'll implement a data pipeline, using MiNiFi and NiFi to ingest data from an IoT device into Kafka and then consume data from Kafka and write it to Kudu tables.
 
