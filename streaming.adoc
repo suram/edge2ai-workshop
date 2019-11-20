@@ -355,11 +355,8 @@ image::images/producers.png[width=800]
 +
 image::images/explore_partition.png[width=800]
 
-. Check the data from the partition. You'll notice something odd. These are readings from temperature sensors and we don't expect any of the sensors to measure temperatures greater than 150 degrees in the conditions they are used. It seems, though, that `sensor_0` and `sensor_1` are intermittently producing noise and some of the measurements have very high values for these measurements.
-+
-image::images/troubled_sensors.png[width=800]
 
-. Stop the *NiFi ExecuteProcess* simulator again.
+. Stop the *NiFi ExecuteProcess* simulator.
 
 
 
